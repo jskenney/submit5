@@ -338,30 +338,6 @@ LOCK TABLES `projectAuthMoreAttempts` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `projectRequiredFiles`
---
-
-DROP TABLE IF EXISTS `projectRequiredFiles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `projectRequiredFiles` (
-  `pid` bigint NOT NULL,
-  `filename` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`pid`,`filename`),
-  CONSTRAINT `fk_projectRequiredFiles_project` FOREIGN KEY (`pid`) REFERENCES `project` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `projectRequiredFiles`
---
-
-LOCK TABLES `projectRequiredFiles` WRITE;
-/*!40000 ALTER TABLE `projectRequiredFiles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `projectRequiredFiles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `submission`
 --
 
@@ -448,6 +424,8 @@ CREATE TABLE `test` (
   `docker` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'cs-base',
   PRIMARY KEY (`tid`),
   UNIQUE KEY `uk_test` (`pid`,`rulename`),
+  KEY `fk_test_db` (`docker`),
+  CONSTRAINT `fk_test_db` FOREIGN KEY (`docker`) REFERENCES `docker_bases` (`docker`) ON UPDATE CASCADE,
   CONSTRAINT `fk_test_project` FOREIGN KEY (`pid`) REFERENCES `project` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10021254 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -630,4 +608,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-27 13:46:11
+-- Dump completed on 2023-09-28  8:35:17
