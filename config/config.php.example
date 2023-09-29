@@ -1,0 +1,10 @@
+<?php
+
+  // Rename this file config.php
+
+  define('DATABASE_HOST', 'localhost');
+  define('DATABASE_USER', 'submit');
+  define('DATABASE_PW',   'mypassword');
+  define('DATABASE_NAME', 'submit5');
+
+?>
